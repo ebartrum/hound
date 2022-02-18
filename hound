@@ -1,0 +1,26 @@
+#!/bin/bash
+
+env=uv_field
+
+command=$*
+
+job_command=`echo $command | awk 'BEGIN { FS="-c" } { print $2 }'`
+stem_command=`echo hound $command | awk 'BEGIN { FS="-c" } { print $1 }'`
+
+num_gpus=1
+if [[ $stem_command == *"-g 2"* ]]; then
+  num_gpus=2
+fi
+if [[ $stem_command == *"-g 3"* ]]; then
+  num_gpus=3
+fi
+if [[ $stem_command == *"-g 4"* ]]; then
+  num_gpus=4
+fi
+
+echo Creating a job with $num_gpus gpus...
+echo Conda env: $env
+echo Job command: $job_command
+
+eval "echo \"$(cat ~/.config/hound/setup_script.sh)\"" > /tmp/slurm_script.sh
+echo $job_command >> /tmp/slurm_script.sh
