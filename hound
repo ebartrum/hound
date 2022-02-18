@@ -24,3 +24,4 @@ echo Job command: $job_command
 
 eval "echo \"$(cat ~/.config/hound/setup.sh)\"" > /tmp/slurm_script.sh
 echo $job_command >> /tmp/slurm_script.sh
+sbatch /tmp/slurm_script.sh
