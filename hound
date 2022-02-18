@@ -22,5 +22,5 @@ echo Creating a job with $num_gpus gpus...
 echo Conda env: $env
 echo Job command: $job_command
 
-eval "echo \"$(cat ~/.config/hound/setup_script.sh)\"" > /tmp/slurm_script.sh
+eval "echo \"$(cat ~/.config/hound/setup.sh)\"" > /tmp/slurm_script.sh
 echo $job_command >> /tmp/slurm_script.sh
