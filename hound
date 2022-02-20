@@ -1,6 +1,5 @@
 #!/bin/bash
 
-env=uv_field
 
 command=$*
 
@@ -10,6 +9,11 @@ stem_command=`echo hound $command | awk 'BEGIN { FS="-c" } { print $1 }'`
 num_gpus=1
 if [[ $stem_command == *"-g "* ]]; then
   num_gpus=`echo $stem_command | awk '{ sub(/.*-g /, ""); sub(/ .*/, ""); print }'`
+fi
+
+env=uv_field
+if [[ $stem_command == *"--env "* ]]; then
+  env=`echo $stem_command | awk '{ sub(/.*--env /, ""); sub(/ .*/, ""); print }'`
 fi
 
 echo Creating a job with $num_gpus gpus...
