@@ -1,0 +1,4 @@
+#!/bin/bash
+
+job_id=$1
+cat ~/hound_logs/$job_id.out
