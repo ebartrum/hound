@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 command=$*
 
 job_command=`echo $command | awk 'BEGIN { FS="-c" } { print $2 }'`
@@ -21,8 +20,14 @@ if [[ $stem_command == *"-n "* ]]; then
   job_name=`echo $stem_command | awk '{ sub(/.*-n /, ""); sub(/ .*/, ""); print }'`
 fi
 
+time=24
+if [[ $stem_command == *"-t "* ]]; then
+  time=`echo $stem_command | awk '{ sub(/.*-t /, ""); sub(/ .*/, ""); print }'`
+fi
+
 echo Creating a job with $num_gpus gpus...
 echo Conda env: $env
+echo Time: $time hours
 echo Job command: $job_command
 
 eval "echo \"$(cat ~/.config/hound/setup.sh)\"" > /tmp/slurm_script.sh
