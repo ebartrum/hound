@@ -1,10 +1,10 @@
 #!/usr/bin/bash
 #SBATCH --qos=turing
-#SBATCH --job-name=RunExpt
-#SBATCH --time=24:00:00
+#SBATCH --job-name=$job_name
+#SBATCH --time=$time:00:00
 #SBATCH --gpus=$num_gpus
 #SBATCH --cpus-per-gpu=8
-#SBATCH --output=/bask/homes/c/csrg3922/Documents/repos/uv_field/logs/slurm/%j.out
+#SBATCH --output=$HOME/hound_logs/%j.out
 
 module purge
 module load baskerville
