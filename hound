@@ -16,6 +16,11 @@ if [[ $stem_command == *"--env "* ]]; then
   env=`echo $stem_command | awk '{ sub(/.*--env /, ""); sub(/ .*/, ""); print }'`
 fi
 
+job_name=Default
+if [[ $stem_command == *"-n "* ]]; then
+  job_name=`echo $stem_command | awk '{ sub(/.*-n /, ""); sub(/ .*/, ""); print }'`
+fi
+
 echo Creating a job with $num_gpus gpus...
 echo Conda env: $env
 echo Job command: $job_command
