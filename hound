@@ -8,14 +8,8 @@ job_command=`echo $command | awk 'BEGIN { FS="-c" } { print $2 }'`
 stem_command=`echo hound $command | awk 'BEGIN { FS="-c" } { print $1 }'`
 
 num_gpus=1
-if [[ $stem_command == *"-g 2"* ]]; then
-  num_gpus=2
-fi
-if [[ $stem_command == *"-g 3"* ]]; then
-  num_gpus=3
-fi
-if [[ $stem_command == *"-g 4"* ]]; then
-  num_gpus=4
+if [[ $stem_command == *"-g "* ]]; then
+  num_gpus=`echo $stem_command | awk '{ sub(/.*-g /, ""); sub(/ .*/, ""); print }'`
 fi
 
 echo Creating a job with $num_gpus gpus...
