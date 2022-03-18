@@ -1,0 +1,3 @@
+#!/bin/bash
+
+squeue -u $USER | awk '{print $1}' | grep -v JOBID |  xargs -n 1 scancel
