@@ -32,4 +32,6 @@ echo Job command: $job_command
 
 eval "echo \"$(cat ~/.config/hound/setup.sh)\"" > ~/tmp/slurm_script.sh
 echo $job_command >> ~/tmp/slurm_script.sh
-sbatch ~/tmp/slurm_script.sh
+job_id=`sbatch ~/tmp/slurm_script.sh | grep -oE '[^ ]+$'`
+echo JOBID: $job_id
+echo $job_command > ~/hound_logs/$job_id.command
