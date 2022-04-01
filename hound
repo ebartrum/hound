@@ -20,7 +20,7 @@ if [[ $stem_command == *"-n "* ]]; then
   job_name=`echo $stem_command | awk '{ sub(/.*-n /, ""); sub(/ .*/, ""); print }'`
 fi
 
-time=24
+time=96
 if [[ $stem_command == *"-t "* ]]; then
   time=`echo $stem_command | awk '{ sub(/.*-t /, ""); sub(/ .*/, ""); print }'`
 fi
