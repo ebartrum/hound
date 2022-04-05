@@ -2,8 +2,9 @@
 
 command=$*
 
-job_command=`echo $command | awk 'BEGIN { FS="-c" } { print $2 }'`
+full_command=`echo hound $command`
 stem_command=`echo hound $command | awk 'BEGIN { FS="-c" } { print $1 }'`
+job_command=`echo ${full_command#${stem_command}-c}`
 
 num_gpus=1
 if [[ $stem_command == *"-g "* ]]; then
