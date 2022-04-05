@@ -1,4 +1,13 @@
 #!/bin/bash
 
 job_id=$1
-cat ~/hound_logs/$job_id.out
+last_job_outfile=`ls ~/hound_logs/ | grep .out | sort -n | tail -n 1`
+last_job_id=${last_job_outfile%.out}
+
+if [ -n "$job_id" ]; then
+    cat ~/hound_logs/$job_id.out
+else
+    echo Showing logs for most recent job $last_job_id
+    cat ~/hound_logs/$last_job_outfile
+fi
+
